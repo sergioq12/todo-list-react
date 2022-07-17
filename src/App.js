@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
+import styled from "styled-components";
+import CalendarDays from "./components/CalendarDays";
+import ItemSection from "./components/ItemSection";
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const Container = styled.div`
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const NavContainer = styled.div`
+  display: flex;
+`;
+
+const Title = styled.h1``;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <NavContainer>
+        <ListAltOutlinedIcon
+          style={{ marginTop: "15px", marginRight: "30px", fontSize: "50px" }}
+        />
+        <Title>Todo List</Title>
+      </NavContainer>
+      <CalendarDays />
+      <ItemSection />
+    </Container>
   );
 }
 
