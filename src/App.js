@@ -3,9 +3,6 @@ import styled from "styled-components";
 import CalendarDays from "./components/CalendarDays";
 import ItemSection from "./components/ItemSection";
 const mongoose = require("mongoose");
-const dotenv = require("dotenv");
-
-dotenv.config();
 
 const Container = styled.div`
   height: 100vh;

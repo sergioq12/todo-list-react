@@ -21,8 +21,11 @@ const DayNumber = styled.span`
 `;
 
 const CalendarBox = (props) => {
+  const handleClick = () => {
+    console.log(props.day);
+  };
   return (
-    <Container backgroundColor={props.color}>
+    <Container backgroundColor={props.color} onClick={handleClick}>
       <DayTitle>{props.day}</DayTitle>
       <DayNumber>{props.dayNum}</DayNumber>
     </Container>
