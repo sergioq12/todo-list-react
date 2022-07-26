@@ -26,8 +26,13 @@ const Item = (props) => {
   return (
     <Container>
       <ItemContainer>
-        <Box item={props.item} toggle={props.toggle} />
-        <ItemDescription>Item here</ItemDescription>
+        <Box
+          id={props.id}
+          done={props.done}
+          description={props.description}
+          toggle={props.toggle}
+        />
+        <ItemDescription>{props.description}</ItemDescription>
       </ItemContainer>
       <Line />
     </Container>

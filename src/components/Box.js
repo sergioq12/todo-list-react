@@ -11,8 +11,8 @@ const Container = styled.div`
 const Box = (props) => {
   return (
     <Container
-      checked={props.item.checked}
-      onClick={() => props.toggle(props.item.id)}
+      checked={props.done}
+      onClick={() => props.toggle(props.id, props.description, !props.done)}
     ></Container>
   );
 };

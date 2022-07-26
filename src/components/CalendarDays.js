@@ -12,14 +12,19 @@ const Container = styled.div`
   padding: 10px;
 `;
 
-const CalendarDays = () => {
+const CalendarDays = (props) => {
   const [data, setData] = useState(calendarData);
-  const boxes = data.map((day) => (
+  const boxes = props.dates.map((date) => (
     <CalendarBox
-      key={day.id}
-      day={day.day}
-      dayNum={day.date.day}
-      color={day.color}
+      key={date.fullDate}
+      fullDate={date.fullDate}
+      day={date.dayName}
+      month={date.month}
+      year={date.year}
+      dayNum={date.day}
+      color={date.color}
+      selected={false}
+      setItems={props.setItems}
     />
   ));
   return <Container>{boxes}</Container>;

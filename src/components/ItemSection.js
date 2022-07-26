@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Item from "./Item";
-import { itemData } from "../data";
+import axios from "axios";
 
 const Container = styled.div`
   width: 55%;
@@ -12,21 +12,29 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const ItemSection = () => {
-  const [data, setData] = useState(itemData);
-
-  function toggle(id) {
-    setData((prevState) => {
-      return prevState.map((item) => {
-        return item.id === id ? { ...item, checked: !item.checked } : item;
-      });
+const ItemSection = (props) => {
+  const [items, setItems] = useState(props.items);
+  const toggle = async (id, description, done) => {
+    console.log("Updating item with id:", id, description, done);
+    const res = await axios.put(`http://localhost:5000/api/items/${id}`, {
+      description: description,
+      done: done,
     });
-  }
-  const items = data.map((item) => (
-    <Item key={item.id} item={item} toggle={toggle} />
-  ));
+  };
 
-  return <Container>{items}</Container>;
+  return (
+    <Container>
+      {props.items.map((item) => (
+        <Item
+          key={item._id}
+          id={item._id}
+          description={item.description}
+          toggle={toggle}
+          done={item.done}
+        />
+      ))}
+    </Container>
+  );
 };
 
 export default ItemSection;

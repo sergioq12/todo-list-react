@@ -95,3 +95,38 @@ export const itemData = [
     description: "Adelantar la todo list",
   },
 ];
+
+export const days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
+export const colors = [
+  "#FFA9F6",
+  "#FF9999",
+  "#FFCD9E",
+  "#ECFF75",
+  "#C6F3A2",
+  "#8CE3FF",
+  "#C994FF",
+];
+
+export const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December",
+];

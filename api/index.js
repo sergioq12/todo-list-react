@@ -3,6 +3,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const itemRoute = require("./routes/item");
 const app = express();
+const cors = require("cors");
 dotenv.config();
 
 // DB Connection
@@ -16,6 +17,7 @@ mongoose
   });
 
 // App configuration
+app.use(cors());
 app.use(express.json());
 app.use("/api/items", itemRoute);
 
