@@ -9,10 +9,12 @@ const Container = styled.div`
 `;
 
 const Box = (props) => {
+  const done = props.done ? false : true;
+  console.log(done);
   return (
     <Container
       checked={props.done}
-      onClick={() => props.toggle(props.id, props.description, !props.done)}
+      onClick={() => props.toggle(props.id, props.description, done)}
     ></Container>
   );
 };

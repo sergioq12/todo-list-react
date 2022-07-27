@@ -14,12 +14,17 @@ const Container = styled.div`
 
 const ItemSection = (props) => {
   const [items, setItems] = useState(props.items);
+  console.log("Before Uptade");
   const toggle = async (id, description, done) => {
     console.log("Updating item with id:", id, description, done);
     const res = await axios.put(`http://localhost:5000/api/items/${id}`, {
       description: description,
       done: done,
     });
+    console.log("After Update");
+    const date = props.dateSelected;
+    await props.getItems(date.getMonth(), date.getDate(), date.getFullYear());
+    console.log("After item retrieval");
   };
 
   return (

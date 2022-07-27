@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import styled from "styled-components";
+import ListAltOutlinedIcon from "@mui/icons-material/ListAltOutlined";
 import CalendarDays from "./components/CalendarDays";
 import ItemSection from "./components/ItemSection";
 import { colors, days, months } from "./data";
+import axios from "axios";
+import Calendar from "./pages/Calendar";
 const mongoose = require("mongoose");
 
 const Container = styled.div`
@@ -40,11 +42,26 @@ function App() {
     }
     return datesArray;
   };
+  const [items, setItems] = useState([]);
+  const getItems = async (month, day, year) => {
+    try {
+      // put the date in correct request format
+      const today = `${month}-${day}-${year}`;
+      // get tomorrow's date in the correct format
+      let tomorrow = new Date(year, month, day);
+      tomorrow = new Date(tomorrow.setDate(tomorrow.getDate() + 1));
+      tomorrow = `${tomorrow.getMonth()}-${tomorrow.getDate()}-${tomorrow.getFullYear()}`;
+
+      // Axios Get Request
+      const res = await axios.get("http://localhost:5000/api/items/find", {
+        params: { today: today, tomorrow: tomorrow },
+      });
+      setItems((prevItems) => res.data);
+    } catch (err) {}
+  };
 
   const [dates, setDates] = useState(getDates());
-  const [items, setItems] = useState([]);
   const [dateSelected, setDateSelected] = useState();
-
   return (
     <Container>
       <NavContainer>
@@ -53,12 +70,14 @@ function App() {
         />
         <Title>Todo List</Title>
       </NavContainer>
-      <CalendarDays
+
+      <Calendar
         dates={dates}
-        setItems={setItems}
         setDateSelected={setDateSelected}
+        getItems={getItems}
+        items={items}
+        dateSelected={dateSelected}
       />
-      <ItemSection items={items} />
     </Container>
   );
 }

@@ -40,25 +40,10 @@ const Triangle = styled.div`
 const CalendarBox = (props) => {
   const [items, setItems] = useState();
   const [isSelected, setIsSelected] = useState(props.selected);
-  const getItems = async (month, day, year) => {
-    try {
-      // put the date in correct request format
-      const today = `${props.month}-${props.dayNum}-${props.year}`;
-      // get tomorrow's date in the correct format
-      let tomorrow = new Date(props.year, props.month, props.dayNum);
-      tomorrow = new Date(tomorrow.setDate(tomorrow.getDate() + 1));
-      tomorrow = `${tomorrow.getMonth()}-${tomorrow.getDate()}-${tomorrow.getFullYear()}`;
-
-      // Axios Get Request
-      const res = await axios.get("http://localhost:5000/api/items/find", {
-        params: { today: today, tomorrow: tomorrow },
-      });
-      setItems(res.data);
-      props.setItems((prevItems) => res.data);
-    } catch (err) {}
-  };
   const handleClick = () => {
-    getItems();
+    props.getItems(props.month, props.dayNum, props.year);
+    const date = new Date(props.year, props.month, props.dayNum);
+    props.setDateSelected(date);
     setIsSelected(true);
   };
   return (

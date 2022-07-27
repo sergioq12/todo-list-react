@@ -24,7 +24,8 @@ const CalendarDays = (props) => {
       dayNum={date.day}
       color={date.color}
       selected={false}
-      setItems={props.setItems}
+      getItems={props.getItems}
+      setDateSelected={props.setDateSelected}
     />
   ));
   return <Container>{boxes}</Container>;
