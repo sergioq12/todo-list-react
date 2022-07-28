@@ -5,7 +5,6 @@ import CalendarBox from "./CalendarBox";
 
 const Container = styled.div`
   display: flex;
-  margin-top: 30px;
   height: 100px;
   width: 80%;
   justify-content: space-around;
