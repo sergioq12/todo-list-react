@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Item from "./Item";
 import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
+import Modal from "./Modal";
 
 const Container = styled.div`
   width: 65%;
@@ -25,6 +26,7 @@ const AddItemButton = styled.button`
   align-items: center;
   border: none;
   border-radius: 10px;
+  cursor: pointer;
   &:hover {
     border: 1px solid #c7c7c7;
   }
@@ -32,37 +34,48 @@ const AddItemButton = styled.button`
 
 const ItemSection = (props) => {
   const [items, setItems] = useState(props.items);
-  console.log("Before Uptade");
   const toggle = async (id, description, done) => {
-    console.log("Updating item with id:", id, description, done);
     const res = await axios.put(`http://localhost:5000/api/items/${id}`, {
       description: description,
       done: done.toString(),
     });
-    console.log("After Update", res);
     const date = props.dateSelected;
     await props.getItems(date.getMonth(), date.getDate(), date.getFullYear());
-    // console.log("After item retrieval");
+  };
+
+  const [openAddItem, setOpenAddItem] = useState(false);
+
+  const handleItemAdder = () => {
+    setOpenAddItem((prevState) => !prevState);
   };
 
   return (
-    <Container>
-      {props.items.map((item) => (
-        <Item
-          key={item._id}
-          id={item._id}
-          description={item.description}
-          toggle={toggle}
-          done={item.done}
+    <>
+      <Container>
+        {props.items.map((item) => (
+          <Item
+            key={item._id}
+            id={item._id}
+            description={item.description}
+            toggle={toggle}
+            done={item.done}
+            dateSelected={props.dateSelected}
+            getItems={props.getItems}
+          />
+        ))}
+        <AddItemButton onClick={handleItemAdder}>
+          <AddIcon style={{ marginRight: "10px" }} />
+          To-Do
+        </AddItemButton>
+      </Container>
+      {openAddItem && (
+        <Modal
+          handleItemAdder={handleItemAdder}
           dateSelected={props.dateSelected}
           getItems={props.getItems}
         />
-      ))}
-      <AddItemButton>
-        <AddIcon style={{ marginRight: "10px" }} />
-        To-Do
-      </AddItemButton>
-    </Container>
+      )}
+    </>
   );
 };
 

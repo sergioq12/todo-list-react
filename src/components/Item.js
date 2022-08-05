@@ -48,14 +48,11 @@ const ItemButton = styled.button`
 
 const Item = (props) => {
   const handleDelete = async () => {
-    console.log("Deleteing the item with id: ", props.id);
     const res = await axios.delete(
       `http://localhost:5000/api/items/${props.id}`
     );
-    console.log("Item deleted");
     const date = props.dateSelected;
     await props.getItems(date.getMonth(), date.getDate(), date.getFullYear());
-    console.log("Items updated");
   };
   return (
     <Container>
