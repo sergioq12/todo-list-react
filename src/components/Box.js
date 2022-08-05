@@ -10,7 +10,6 @@ const Container = styled.div`
 
 const Box = (props) => {
   const done = props.done ? false : true;
-  console.log("Current Done state:", props.done);
   return (
     <Container
       checked={props.done}

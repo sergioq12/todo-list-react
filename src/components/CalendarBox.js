@@ -39,13 +39,29 @@ const Triangle = styled.div`
 
 const CalendarBox = (props) => {
   const [items, setItems] = useState();
-  const [isSelected, setIsSelected] = useState(props.selected);
+  const [isSelected, setIsSelected] = useState(false);
   const handleClick = () => {
     props.getItems(props.month, props.dayNum, props.year);
     const date = new Date(props.year, props.month, props.dayNum);
+    console.log(date, props.dateSelected);
     props.setDateSelected(date);
     setIsSelected(true);
   };
+
+  // check if this is the selected box
+  useEffect(() => {
+    const date = new Date(props.year, props.month, props.dayNum);
+    const d = props.dateSelected;
+    if (
+      d.getFullYear() === date.getFullYear() &&
+      d.getMonth() === date.getMonth() &&
+      d.getDate() === date.getDate()
+    ) {
+      setIsSelected(true);
+    } else {
+      setIsSelected(false);
+    }
+  });
   return (
     <OuterContainer>
       <InnerContainer backgroundColor={props.color} onClick={handleClick}>

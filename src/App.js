@@ -61,7 +61,13 @@ function App() {
   };
 
   const [dates, setDates] = useState(getDates());
-  const [dateSelected, setDateSelected] = useState();
+  const today = new Date();
+  const [dateSelected, setDateSelected] = useState(
+    new Date(today.getFullYear(), today.getMonth(), today.getDate())
+  );
+  const changeSelectedDate = (date) => {
+    setDateSelected(date);
+  };
   return (
     <Container>
       <NavContainer>
@@ -73,7 +79,7 @@ function App() {
 
       <Calendar
         dates={dates}
-        setDateSelected={setDateSelected}
+        setDateSelected={changeSelectedDate}
         getItems={getItems}
         items={items}
         dateSelected={dateSelected}

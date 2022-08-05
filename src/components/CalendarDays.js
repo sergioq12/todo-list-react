@@ -22,8 +22,8 @@ const CalendarDays = (props) => {
       year={date.year}
       dayNum={date.day}
       color={date.color}
-      selected={false}
       getItems={props.getItems}
+      dateSelected={props.dateSelected}
       setDateSelected={props.setDateSelected}
     />
   ));
