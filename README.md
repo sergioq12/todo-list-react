@@ -2,9 +2,7 @@
 
 This project is a MERN (MongoDB, ExpressJS, ReactJS, NodeJS) build that attempts to create a Todo List for different users. The main idea was to be able to use ReactJS for the frontend, while using NodeJS for Backend to connect the API build with ExpressJS. The API's main goal is to be able to communicate with our MongoDB database system so we add, delete, edit, and present the tasks of our todo-list.
 
-
-
-
+![alt text](https://github.com/sergioq12/todo-list-react/blob/master/TodoListImage.png)
 
 # Getting Started with Create React App
 
